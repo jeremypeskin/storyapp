@@ -83,3 +83,8 @@ img {
 .navigation-drawer {
   padding: 1%;
 }
+
+.verse-textarea {
+  max-width: 400px;
+  margin: auto;
+}

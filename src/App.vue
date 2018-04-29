@@ -8,7 +8,14 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
     <v-content>
-      <HelloWorld v-for="page in pages" :font="fontFamily" :inputx="page.input" :illustrationx="page.illustration"></HelloWorld>
+      <HelloWorld
+        v-for="page in pages"
+        :font="fontFamily"
+        :inputx="page.input"
+        :illustrationx="page.illustration"
+        :editingx="page.editing"
+        @inputWasEdited="page.input = $event">
+      </HelloWorld>
     </v-content>
   </v-app>
 </template>
@@ -23,8 +30,11 @@ export default {
   data () {
     return {
       pages: [
-        {input: 'Write your verse, No need to rehearse.',
-        illustration: 'forest.png'}
+        {
+          input: 'Write your verse, No need to rehearse.',
+          illustration: 'forest.png',
+          editing: false
+        }
       ],
       drawer: false,
       fontFamily: 'blackAndWhite',

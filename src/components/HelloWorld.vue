@@ -4,7 +4,17 @@
       <v-layout>
         <div class="page page1">
           <div class="verse">
-            <div :class="font" style="white-space:pre-line">
+            <v-text-field
+              textarea
+              :value="inputx"
+              v-model="inputCopy"
+              v-on:input="newInput(inputCopy)"
+              class="verse-textarea"
+              v-if="editingx"
+              @blur="doneEdit(inputCopy)"
+              >
+            </v-text-field>
+            <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
               {{inputx}}
             </div>
           </div>
@@ -23,11 +33,26 @@
       font: String,
       inputx: String,
       illustrationx: String,
+      editingx: Boolean
     },
     data: function() {
-      return {}
+      return {
+        inputCopy: this.inputx,
+      }
     },
-    methods: {},
+    methods: {
+      newInput: function(y) {
+        console.log(y)
+
+      },
+      editVerse: function() {
+        this.editingx = true
+      },
+      doneEdit: function(y) {
+        this.editingx = false
+        this.$emit('inputWasEdited', y)
+      }
+    },
     computed: {
       compiledMarkdown: function () {
         return marked(this.inputx, { sanitize: true })
