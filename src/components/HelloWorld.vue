@@ -12,7 +12,6 @@
               class="verse-textarea"
               v-if="editingx"
               @blur="doneEdit(inputCopy)"
-              v-todo-focus="todo == editedTodo"
               >
             </v-text-field>
             <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
@@ -44,7 +43,8 @@
     data: function() {
       return {
         inputCopy: this.inputx,
-        illustrationxCopy: this.illustrationx
+        illustrationxCopy: this.illustrationx,
+        editedVerse: null
       }
     },
     methods: {
@@ -67,13 +67,6 @@
     },
     components: {
       ImageSettings
-    },
-    directives: {
-    'todo-focus': function (el, binding) {
-      if (binding.value) {
-        el.focus()
-        }
-      }
     }
   };
 </script>

@@ -2,6 +2,7 @@
   <v-app>
     <v-navigation-drawer v-model="drawer" app>
       <PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event"></PageSettings>
+      <v-btn v-on:click="addPage">New Page</v-btn>
     </v-navigation-drawer>
     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -45,6 +46,16 @@ export default {
     HelloWorld,
     PageSettings,
     ImageSettings
+  },
+  methods: {
+    addPage: function(){
+      this.pages.push({
+        input:
+          'Double click to edit, never forget it.',
+        illustration: 'forest.png',
+        editing: false
+      })
+    }
   }
 }
 </script>
