@@ -24,6 +24,7 @@
               @illustrationWasEdited="illustrationxCopy=$event">
             </ImageSettings>
           </div>
+          <v-btn v-on:click="addNewPage">New Page</v-btn>
         </div>
       </v-layout>
     </v-slide-y-transition>
@@ -38,7 +39,8 @@
       font: String,
       inputx: String,
       illustrationx: String,
-      editingx: Boolean
+      editingx: Boolean,
+      pagesx: Array
     },
     data: function() {
       return {
@@ -58,6 +60,15 @@
       doneEdit: function(y) {
         this.editingx = false
         this.$emit('inputWasEdited', y)
+      },
+      addNewPage: function(){
+        console.log("Adding page")
+        this.pagesx.push({
+          input: 'Double click to edit, never forget it.',
+          illustration: 'forest.png',
+          editing: false})
+        console.log(newPage)
+        this.$emit(pagesx)
       }
     },
     computed: {
