@@ -10,15 +10,6 @@
       persistent-hint
       >
     </v-select>
-
-    <v-text-field
-    textarea
-    :value="inputx"
-    v-model="inputCopy"
-    v-on:input="newInput(inputCopy)"
-    persistent-hint
-    >
-    </v-text-field>
   </div>
 </template>
 
@@ -28,7 +19,6 @@
     data: function() {
       return {
         fontCopy: this.font,
-        inputCopy: this.inputx,
         options: [
           { text: 'Fredericka', value: 'fredericka' },
           { text: 'Annie', value: 'annie' },
@@ -40,15 +30,6 @@
       newFont: function(x) {
         this.$emit('fontWasEdited', x)
       },
-      newInput: function(y) {
-        console.log(y)
-        this.$emit('inputWasEdited', y)
-      }
-    },
-    computed: {
-      compiledMarkdown: function () {
-        return marked(this.input, { sanitize: true })
-      }
     },
   };
 </script>

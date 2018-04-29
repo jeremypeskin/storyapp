@@ -12,6 +12,7 @@
               class="verse-textarea"
               v-if="editingx"
               @blur="doneEdit(inputCopy)"
+              v-todo-focus="todo == editedTodo"
               >
             </v-text-field>
             <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
@@ -19,7 +20,10 @@
             </div>
           </div>
           <div class="images">
-            <img :src="require('@/assets/images/' + illustrationx)" class='z-depth-5 page-illustration'/>
+            <ImageSettings
+              :illustrationy="illustrationxCopy"
+              @illustrationWasEdited="illustrationxCopy=$event">
+            </ImageSettings>
           </div>
         </div>
       </v-layout>
@@ -28,6 +32,8 @@
 </template>
 
 <script>
+
+  import ImageSettings from './ImageSettings'
   export default {
     props: {
       font: String,
@@ -38,6 +44,7 @@
     data: function() {
       return {
         inputCopy: this.inputx,
+        illustrationxCopy: this.illustrationx
       }
     },
     methods: {
@@ -58,5 +65,15 @@
         return marked(this.inputx, { sanitize: true })
       }
     },
+    components: {
+      ImageSettings
+    },
+    directives: {
+    'todo-focus': function (el, binding) {
+      if (binding.value) {
+        el.focus()
+        }
+      }
+    }
   };
 </script>

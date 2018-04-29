@@ -1,8 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" app>
-      <!--<PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event" :inputx="input" @inputWasEdited="input = $event"></PageSettings>-->
-      <!--<ImageSettings :illustrationx="illustration" @illustrationWasEdited="illustration=$event"></ImageSettings>-->
+      <PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event"></PageSettings>
     </v-navigation-drawer>
     <v-toolbar app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -23,15 +22,16 @@
 <script>
 
 import HelloWorld from './components/HelloWorld'
-//import PageSettings from './components/PageSettings'
-//import ImageSettings from './components/ImageSettings'
+import PageSettings from './components/PageSettings'
+import ImageSettings from './components/ImageSettings'
 
 export default {
   data () {
     return {
       pages: [
         {
-          input: 'Write your verse, No need to rehearse.',
+          input:
+            'Double click to edit, never forget it.',
           illustration: 'forest.png',
           editing: false
         }
@@ -43,8 +43,8 @@ export default {
   name: 'App',
   components: {
     HelloWorld,
-    //PageSettings,
-    //ImageSettings
+    PageSettings,
+    ImageSettings
   }
 }
 </script>
