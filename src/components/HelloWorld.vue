@@ -14,7 +14,7 @@
               >
             </v-text-field>
             <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
-              {{inputx}}{{this.$vnode.key}}
+              {{inputx}}
             </div>
           </div>
           <div class="images">
@@ -23,12 +23,14 @@
               @illustrationWasEdited="illustrationxCopy=$event">
             </ImageSettings>
           </div>
-          <v-btn fab dark color="indigo" v-on:click="addNewPage(pagex)">
-            <v-icon dark>add</v-icon>
-          </v-btn>
-          <v-btn fab dark color="indigo" v-on:click="removePage(pagex)">
-            <v-icon dark>remove</v-icon>
-          </v-btn>
+          <div class="page-buttons">
+            <v-btn v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
+              <v-icon light>add</v-icon>
+            </v-btn>
+            <v-btn fab light color="#FAF3DD" v-on:click="removePage(pagex)">
+              <v-icon light>remove</v-icon>
+            </v-btn>
+          </div>
         </div>
       </v-layout>
     </v-slide-y-transition>
@@ -40,15 +42,14 @@
   import ImageSettings from './ImageSettings'
   export default {
     props: {
+      index: Number,
       font: String,
       inputx: String,
       illustrationx: String,
       editingx: Boolean,
       pagex: Object,
       pagesx: Array,
-      idx: Number,
-      nextPageIdx: Number,
-      indexx: Number
+      nextPageIdx: Number
     },
     data: function() {
       return {
@@ -67,17 +68,15 @@
         this.editingx = false
         this.$emit('inputWasEdited', y)
       },
-      addNewPage: function(page){
+      addNewPage: function(){
         this.pagesx.push({
           input: 'Double click to edit, never forget it.',
           illustration: 'forest.png',
           editing: false,
           id: this.nextPageIdCopy++
         })
-        console.log("The key of the current page is: " + this.$vnode.key)
         this.$emit('pageWasAdded', this.pagesx)
         this.$emit('pageIdUpdated', this.nextPageIdCopy)
-        console.log("Now the nextpageid after emit is: " + this.nextPageIdCopy)
       },
       removePage: function(page){
         var pageIndex = this.pagesx.indexOf(page);

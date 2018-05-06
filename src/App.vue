@@ -9,9 +9,9 @@
     <v-content>
       <HelloWorld
         v-for="(page, index) in pages"
+        :index="index"
         :font="fontFamily"
         :pagex="page"
-        :indexx="index"
         :pagesx="pages"
         :nextPageIdx="nextPageId"
         :inputx="page.input"

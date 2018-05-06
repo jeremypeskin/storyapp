@@ -91,3 +91,11 @@ img {
   max-width: 400px;
   margin: auto;
 }
+
+.page-buttons {
+  opacity: 0;
+  transition: 300ms;
+}
+body:hover .page-buttons {
+  opacity: 1;
+}
