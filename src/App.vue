@@ -8,14 +8,20 @@
     </v-toolbar>
     <v-content>
       <HelloWorld
-        v-for="page in pages"
+        v-for="(page, index) in pages"
         :font="fontFamily"
+        :pagex="page"
+        :indexx="index"
         :pagesx="pages"
+        :nextPageIdx="nextPageId"
         :inputx="page.input"
         :illustrationx="page.illustration"
         :editingx="page.editing"
+        :key="page.id"
         @inputWasEdited="page.input = $event"
         @pageWasAdded="pages=$event"
+        @pageIdUpdated="nextPageId=$event"
+        @pageWasRemoved="pages=$event"
         >
       </HelloWorld>
     </v-content>
@@ -33,14 +39,15 @@ export default {
     return {
       pages: [
         {
-          input:
-            'Double click to edit, never forget it.',
+          input:'Double click to edit, never forget it.',
           illustration: 'forest.png',
-          editing: false
+          editing: false,
+          id:1
         }
       ],
       drawer: false,
       fontFamily: 'blackAndWhite',
+      nextPageId:2
     }
   },
   name: 'App',

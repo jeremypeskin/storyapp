@@ -8,14 +8,13 @@
               textarea
               :value="inputx"
               v-model="inputCopy"
-              v-on:input="newInput(inputCopy)"
               class="verse-textarea"
               v-if="editingx"
               @blur="doneEdit(inputCopy)"
               >
             </v-text-field>
             <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
-              {{inputx}}
+              {{inputx}}{{this.$vnode.key}}
             </div>
           </div>
           <div class="images">
@@ -24,7 +23,12 @@
               @illustrationWasEdited="illustrationxCopy=$event">
             </ImageSettings>
           </div>
-          <v-btn v-on:click="addNewPage">New Page</v-btn>
+          <v-btn fab dark color="indigo" v-on:click="addNewPage(pagex)">
+            <v-icon dark>add</v-icon>
+          </v-btn>
+          <v-btn fab dark color="indigo" v-on:click="removePage(pagex)">
+            <v-icon dark>remove</v-icon>
+          </v-btn>
         </div>
       </v-layout>
     </v-slide-y-transition>
@@ -40,20 +44,22 @@
       inputx: String,
       illustrationx: String,
       editingx: Boolean,
-      pagesx: Array
+      pagex: Object,
+      pagesx: Array,
+      idx: Number,
+      nextPageIdx: Number,
+      indexx: Number
     },
     data: function() {
       return {
         inputCopy: this.inputx,
         illustrationxCopy: this.illustrationx,
-        editedVerse: null
+        editedVerse: null,
+        nextPageIdCopy: this.nextPageIdx,
+        editingCopy: this.editingx
       }
     },
     methods: {
-      newInput: function(y) {
-        console.log(y)
-
-      },
       editVerse: function() {
         this.editingx = true
       },
@@ -61,21 +67,25 @@
         this.editingx = false
         this.$emit('inputWasEdited', y)
       },
-      addNewPage: function(){
-        console.log("Adding page")
+      addNewPage: function(page){
         this.pagesx.push({
           input: 'Double click to edit, never forget it.',
           illustration: 'forest.png',
-          editing: false})
-        console.log(newPage)
-        this.$emit(pagesx)
+          editing: false,
+          id: this.nextPageIdCopy++
+        })
+        console.log("The key of the current page is: " + this.$vnode.key)
+        this.$emit('pageWasAdded', this.pagesx)
+        this.$emit('pageIdUpdated', this.nextPageIdCopy)
+        console.log("Now the nextpageid after emit is: " + this.nextPageIdCopy)
+      },
+      removePage: function(page){
+        var pageIndex = this.pagesx.indexOf(page);
+        this.pagesx.splice(pageIndex, 1)
+        this.$emit('pageWasRemoved', this.pagesx)
       }
     },
-    computed: {
-      compiledMarkdown: function () {
-        return marked(this.inputx, { sanitize: true })
-      }
-    },
+
     components: {
       ImageSettings
     }
