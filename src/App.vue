@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" app>
       <PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event"></PageSettings>
     </v-navigation-drawer>
-    <v-toolbar app>
+    <v-toolbar app v-show="showOptions">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>
     <v-content>
@@ -18,6 +18,7 @@
         :illustrationx="page.illustration"
         :editingx="page.editing"
         :key="page.id"
+        :showOptions="showOptions"
         @inputWasEdited="page.input = $event"
         @pageWasAdded="pages=$event"
         @pageIdUpdated="nextPageId=$event"
@@ -47,7 +48,8 @@ export default {
       ],
       drawer: false,
       fontFamily: 'blackAndWhite',
-      nextPageId:2
+      nextPageId:2,
+      showOptions:false
     }
   },
   name: 'App',
@@ -55,6 +57,22 @@ export default {
     HelloWorld,
     PageSettings,
     ImageSettings
+  },
+  methods: {
+    displayOptions(){
+      console.log("Mouse moved!")
+    }
+  },
+  mounted: function(){
+    var that = this
+    window.onmousemove = function(){
+      that.showOptions=true
+      if (page.editing===false) {
+        setTimeout(function(){
+          that.showOptions=false
+        }, 3000);
+      }
+    }.bind(this)
   }
 }
 </script>

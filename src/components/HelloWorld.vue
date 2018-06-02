@@ -3,34 +3,38 @@
     <v-slide-y-transition mode="out-in">
       <v-layout>
         <div class="page page1">
-          <div class="verse">
-            <v-text-field
-              textarea
-              :value="inputx"
-              v-model="inputCopy"
-              class="verse-textarea"
-              v-if="editingx"
-              @blur="doneEdit(inputCopy)"
-              >
-            </v-text-field>
-            <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
-              {{inputx}}
-            </div>
-          </div>
-          <div class="images">
-            <ImageSettings
-              :illustrationy="illustrationxCopy"
-              @illustrationWasEdited="illustrationxCopy=$event">
-            </ImageSettings>
-          </div>
-          <div class="page-buttons">
-            <v-btn v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
-              <v-icon light>add</v-icon>
-            </v-btn>
-            <v-btn fab light color="#FAF3DD" v-on:click="removePage(pagex)">
-              <v-icon light>remove</v-icon>
-            </v-btn>
-          </div>
+          <v-layout row wrap>
+            <v-flex class="verse" sm12 md6 >
+              <v-text-field
+                textarea
+                :value="inputx"
+                v-model="inputCopy"
+                class="verse-textarea"
+                v-if="editingx"
+                @blur="doneEdit(inputCopy)"
+                >
+              </v-text-field>
+              <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
+                {{inputx}}
+              </div>
+            </v-flex>
+            <v-flex sm12 md6 class="images">
+              <ImageSettings
+                :illustrationy="illustrationxCopy"
+                @illustrationWasEdited="illustrationxCopy=$event">
+              </ImageSettings>
+            </v-flex>
+          </v-layout>
+           <transition name="fade">
+             <div class="page-buttons" v-if="showOptions">
+               <v-btn v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
+                 <v-icon light>add</v-icon>
+               </v-btn>
+               <v-btn fab light color="#FAF3DD" v-on:click="removePage(pagex)">
+                 <v-icon light>remove</v-icon>
+               </v-btn>
+             </div>
+           </transition>
         </div>
       </v-layout>
     </v-slide-y-transition>
@@ -49,7 +53,8 @@
       editingx: Boolean,
       pagex: Object,
       pagesx: Array,
-      nextPageIdx: Number
+      nextPageIdx: Number,
+      showOptions: Boolean
     },
     data: function() {
       return {
@@ -67,6 +72,7 @@
       doneEdit: function(y) {
         this.editingx = false
         this.$emit('inputWasEdited', y)
+        vm.$forceUpdate()
       },
       addNewPage: function(){
         this.pagesx.push({
