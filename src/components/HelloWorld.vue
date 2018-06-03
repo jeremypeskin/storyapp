@@ -1,12 +1,12 @@
 <template>
 
     <v-slide-y-transition mode="out-in">
-      <v-layout>
+      <v-layout app-container>
         <v-btn class="nav-drawer-button" icon @click.stop="toggleDrawer">
-          <v-icon>edit</v-icon>
+          <v-icon>settings</v-icon>
         </v-btn>
         <div class="page page1">
-          <v-layout row wrap>
+          <v-layout page-content row wrap>
             <v-flex class="verse" sm12 md6 >
               <v-text-field
                 textarea
@@ -30,11 +30,11 @@
           </v-layout>
            <transition name="fade">
              <div class="page-buttons" v-if="showOptions">
-               <v-btn icon v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
-                 <v-icon light>add</v-icon>
+               <v-btn icon v-if="index == pagesx.length-1" color="#FAF3DD" v-on:click="addNewPage">
+                 <v-icon>add</v-icon>
                </v-btn>
-               <v-btn icon fab light color="#FAF3DD" v-on:click="removePage(pagex)">
-                 <v-icon light>remove</v-icon>
+               <v-btn icon color="#FAF3DD" v-on:click="removePage(pagex)">
+                 <v-icon>remove</v-icon>
                </v-btn>
              </div>
            </transition>

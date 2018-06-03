@@ -41,32 +41,15 @@ img {
   height: 100%;
   width: 20%; }
 
-.page1 {
+.app-container {
   background-color: #FAF3DD;
   background-image: url('../images/nature.png');
   background-repeat: repeat;
 }
 
-.page2 {
-  background-color: #B8F2E6; }
-
-.page3 {
-  background-color: #A8D0DB; }
-
-.page4 {
-  background-color: #FAF9F9; }
-
-.page5 {
-  background-color: #CCE8CC; }
-
-.page6 {
-  background-color: #E2B6CF; }
-
-.page7 {
-  background-color: #F3DE8A; }
-
-.page8 {
-  background-color: #B8F2E6; }
+.page-content {
+  padding-top: 100px;
+}
 
 .sidebar-content {
   background: #edf1f2;
@@ -116,7 +99,7 @@ body .page-buttons:hover {
   page {
     size: landscape
   }
-  .page-buttons {
+  .page-buttons, .nav-drawer-button {
     display: none;
   }
   .flex.md6 {
