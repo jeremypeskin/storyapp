@@ -2,6 +2,9 @@
 
     <v-slide-y-transition mode="out-in">
       <v-layout>
+        <v-btn class="nav-drawer-button" icon @click.stop="toggleDrawer">
+          <v-icon>edit</v-icon>
+        </v-btn>
         <div class="page page1">
           <v-layout row wrap>
             <v-flex class="verse" sm12 md6 >
@@ -27,10 +30,10 @@
           </v-layout>
            <transition name="fade">
              <div class="page-buttons" v-if="showOptions">
-               <v-btn v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
+               <v-btn icon v-if="index == pagesx.length-1" fab light color="#FAF3DD" v-on:click="addNewPage">
                  <v-icon light>add</v-icon>
                </v-btn>
-               <v-btn fab light color="#FAF3DD" v-on:click="removePage(pagex)">
+               <v-btn icon fab light color="#FAF3DD" v-on:click="removePage(pagex)">
                  <v-icon light>remove</v-icon>
                </v-btn>
              </div>
@@ -54,7 +57,8 @@
       pagex: Object,
       pagesx: Array,
       nextPageIdx: Number,
-      showOptions: Boolean
+      showOptions: Boolean,
+      drawer: Boolean
     },
     data: function() {
       return {
@@ -62,7 +66,8 @@
         illustrationxCopy: this.illustrationx,
         editedVerse: null,
         nextPageIdCopy: this.nextPageIdx,
-        editingCopy: this.editingx
+        editingCopy: this.editingx,
+        drawerCopy: this.drawer
       }
     },
     methods: {
@@ -88,6 +93,12 @@
         var pageIndex = this.pagesx.indexOf(page);
         this.pagesx.splice(pageIndex, 1)
         this.$emit('pageWasRemoved', this.pagesx)
+      },
+      toggleDrawer: function(){
+        console.log(this.drawer)
+        this.drawerCopy = !this.drawerCopy
+        console.log(this.drawer)
+        this.$emit('toggleDrawer', this.drawerCopy)
       }
     },
 

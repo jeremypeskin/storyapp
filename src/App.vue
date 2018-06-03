@@ -3,9 +3,9 @@
     <v-navigation-drawer v-model="drawer" app>
       <PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event"></PageSettings>
     </v-navigation-drawer>
-    <v-toolbar app v-show="showOptions">
+    <!--<v-toolbar app v-show="showOptions">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-    </v-toolbar>
+    </v-toolbar>-->
     <v-content>
       <HelloWorld
         v-for="(page, index) in pages"
@@ -19,10 +19,12 @@
         :editingx="page.editing"
         :key="page.id"
         :showOptions="showOptions"
+        :drawer="drawer"
         @inputWasEdited="page.input = $event"
         @pageWasAdded="pages=$event"
         @pageIdUpdated="nextPageId=$event"
         @pageWasRemoved="pages=$event"
+        @toggleDrawer="drawer=$event"
         >
       </HelloWorld>
     </v-content>

@@ -87,6 +87,14 @@ img {
   padding: 1%;
 }
 
+.nav-drawer-button {
+  position: fixed;
+  opacity: 0.5;
+}
+.nav-drawer-button:hover {
+  opacity: 1;
+}
+
 .verse-textarea {
   max-width: 400px;
   margin: auto;
@@ -97,6 +105,9 @@ img {
   transition: 300ms;
 }
 body:hover .page-buttons {
+  opacity: 0.5;
+}
+body .page-buttons:hover {
   opacity: 1;
 }
 
