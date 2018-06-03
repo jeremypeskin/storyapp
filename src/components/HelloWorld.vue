@@ -3,7 +3,7 @@
     <v-slide-y-transition mode="out-in">
       <v-layout app-container>
         <v-btn class="nav-drawer-button" icon @click.stop="toggleDrawer">
-          <v-icon>settings</v-icon>
+          <v-icon>more_vert</v-icon>
         </v-btn>
         <div class="page page1">
           <v-layout page-content row wrap>
@@ -13,11 +13,11 @@
                 :value="inputx"
                 v-model="inputCopy"
                 class="verse-textarea"
-                v-if="editingx"
+                v-if="editingCopy"
                 @blur="doneEdit(inputCopy)"
                 >
               </v-text-field>
-              <div :class="font" style="white-space:pre-line" v-if="!editingx" @dblclick="editVerse">
+              <div :class="font" style="white-space:pre-line" v-if="!editingCopy" @dblclick="editVerse">
                 {{inputx}}
               </div>
             </v-flex>
@@ -33,7 +33,7 @@
                <v-btn icon v-if="index == pagesx.length-1" color="#FAF3DD" v-on:click="addNewPage">
                  <v-icon>add</v-icon>
                </v-btn>
-               <v-btn icon color="#FAF3DD" v-on:click="removePage(pagex)">
+               <v-btn icon v-if="index >= 1" color="#FAF3DD" v-on:click="removePage(pagex)">
                  <v-icon>remove</v-icon>
                </v-btn>
              </div>
@@ -72,12 +72,11 @@
     },
     methods: {
       editVerse: function() {
-        this.editingx = true
+        this.editingCopy = true
       },
       doneEdit: function(y) {
-        this.editingx = false
+        this.editingCopy = false
         this.$emit('inputWasEdited', y)
-        vm.$forceUpdate()
       },
       addNewPage: function(){
         this.pagesx.push({
@@ -101,9 +100,13 @@
         this.$emit('toggleDrawer', this.drawerCopy)
       }
     },
-
     components: {
       ImageSettings
+    },
+    watch: {
+      inputx: function(){
+        localStorage.setItem('storedData', this.inputx)
+      }
     }
   };
 </script>

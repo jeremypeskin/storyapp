@@ -60,20 +60,10 @@ export default {
     PageSettings,
     ImageSettings
   },
-  methods: {
-    displayOptions(){
-      console.log("Mouse moved!")
-    }
-  },
   mounted: function(){
     var that = this
     window.onmousemove = function(){
       that.showOptions=true
-      if (page.editing===false) {
-        setTimeout(function(){
-          that.showOptions=false
-        }, 3000);
-      }
     }.bind(this)
   }
 }
