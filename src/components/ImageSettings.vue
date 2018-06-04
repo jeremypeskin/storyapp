@@ -43,6 +43,14 @@
           {title: 'Lion', url:'lion.png'},
           {title: 'Owls', url:'owls.png'},
           {title: 'Town', url:'town.png'},
+          {title: 'Food', url:'food.png'},
+          {title: 'Spaceman', url:'spaceman.png'},
+          {title: 'Planets', url:'planets.png'},
+          {title: 'Snakes', url:'snakes.png'},
+          {title: 'Home', url:'home.png'},
+          {title: 'Winterforest', url:'winter-forest.png'},
+          {title: 'Sea', url:'sea.png'},
+          {title: 'Rocket', url:'rocket.png'}
         ]
       }
     },

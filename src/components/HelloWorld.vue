@@ -2,10 +2,15 @@
 
     <v-slide-y-transition mode="out-in">
       <v-layout app-container>
-        <v-btn class="nav-drawer-button" icon @click.stop="toggleDrawer">
-          <v-icon>more_vert</v-icon>
-        </v-btn>
-        <div class="page page1">
+        <div class="nav-drawer-button">
+          <v-btn icon @click.stop="toggleDrawer">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-btn icon @click="print">
+            <v-icon>print</v-icon>
+          </v-btn>
+        </div>
+        <div class="page page1" :class="theme">
           <v-layout page-content row wrap>
             <v-flex class="verse" sm12 md6 >
               <v-text-field
@@ -19,6 +24,7 @@
               </v-text-field>
               <div :class="font" style="white-space:pre-line" v-if="!editingCopy" @dblclick="editVerse">
                 {{inputx}}
+                <img :src="require('@/assets/images/' + theme + '-footer.svg')" class="footer-img"/>
               </div>
             </v-flex>
             <v-flex sm12 md6 class="images">
@@ -58,7 +64,8 @@
       pagesx: Array,
       nextPageIdx: Number,
       showOptions: Boolean,
-      drawer: Boolean
+      drawer: Boolean,
+      theme: String
     },
     data: function() {
       return {
@@ -79,11 +86,12 @@
         this.$emit('inputWasEdited', y)
       },
       addNewPage: function(){
+        var that = this
         this.pagesx.push({
           input: 'Double click to edit, never forget it.',
           illustration: 'forest.png',
           editing: false,
-          id: this.nextPageIdCopy++
+          id: this.nextPageIdCopy++,
         })
         this.$emit('pageWasAdded', this.pagesx)
         this.$emit('pageIdUpdated', this.nextPageIdCopy)
@@ -98,15 +106,13 @@
         this.drawerCopy = !this.drawerCopy
         console.log(this.drawer)
         this.$emit('toggleDrawer', this.drawerCopy)
+      },
+      print: function(){
+        window.print()
       }
     },
     components: {
       ImageSettings
     },
-    watch: {
-      inputx: function(){
-        localStorage.setItem('storedData', this.inputx)
-      }
-    }
   };
 </script>

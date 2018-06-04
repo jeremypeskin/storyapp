@@ -1,7 +1,12 @@
 <template>
   <v-app>
     <v-navigation-drawer v-model="drawer" app>
-      <PageSettings :font="fontFamily" @fontWasEdited="fontFamily = $event"></PageSettings>
+      <PageSettings
+        :font="fontFamily"
+        :theme="theme"
+        @fontWasEdited="fontFamily = $event"
+        @themeWasEdited="theme = $event"
+        ></PageSettings>
     </v-navigation-drawer>
     <!--<v-toolbar app v-show="showOptions">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
@@ -20,6 +25,7 @@
         :key="page.id"
         :showOptions="showOptions"
         :drawer="drawer"
+        :theme="theme"
         @inputWasEdited="page.input = $event"
         @pageWasAdded="pages=$event"
         @pageIdUpdated="nextPageId=$event"
@@ -45,13 +51,14 @@ export default {
           input:'Double click to edit, never forget it.',
           illustration: 'forest.png',
           editing: false,
-          id:1
+          id:1,
         }
       ],
       drawer: false,
       fontFamily: 'blackAndWhite',
       nextPageId:2,
-      showOptions:false
+      showOptions:false,
+      theme: 'nature'
     }
   },
   name: 'App',

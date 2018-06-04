@@ -41,14 +41,22 @@ img {
   height: 100%;
   width: 20%; }
 
-.app-container {
-  background-color: #FAF3DD;
-  background-image: url('../images/nature.png');
+.page1 {
+  /*background-color: #FAF3DD;*/
   background-repeat: repeat;
+}
+.nature {
+  background-image: url('../images/nature.png');
+}
+.winter {
+  background-image: url('../images/winter.png');
+}
+.space {
+  background-image: url('../images/space.png');
 }
 
 .page-content {
-  padding-top: 100px;
+  padding-top: 150px;
 }
 
 .sidebar-content {
@@ -73,6 +81,7 @@ img {
 .nav-drawer-button {
   position: fixed;
   opacity: 0.5;
+  transition: 300ms;
 }
 .nav-drawer-button:hover {
   opacity: 1;
@@ -92,6 +101,12 @@ body:hover .page-buttons {
 }
 body .page-buttons:hover {
   opacity: 1;
+}
+
+.footer-img {
+  width: 150px;
+  box-shadow: none;
+  margin-top: 20px;
 }
 
 /* Styles for printing */
