@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-snackbar
+      style="z-index:1;"
       :timeout="timeout"
       :color="color"
       :multi-line="mode === 'multi-line'"
