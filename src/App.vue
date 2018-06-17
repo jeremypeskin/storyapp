@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <SnackBar></SnackBar>
     <v-navigation-drawer v-model="drawer" app>
       <PageSettings
         :font="fontFamily"
@@ -42,6 +43,7 @@
 import HelloWorld from './components/HelloWorld'
 import PageSettings from './components/PageSettings'
 import ImageSettings from './components/ImageSettings'
+import SnackBar from './components/SnackBar'
 
 export default {
   data () {
@@ -65,7 +67,8 @@ export default {
   components: {
     HelloWorld,
     PageSettings,
-    ImageSettings
+    ImageSettings,
+    SnackBar
   },
   mounted: function(){
     var that = this
