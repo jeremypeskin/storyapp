@@ -12,7 +12,7 @@
     <!--<v-toolbar app v-show="showOptions">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     </v-toolbar>-->
-    <v-content>
+    <v-content id="pages-container">
       <HelloWorld
         v-for="(page, index) in pages"
         :index="index"
